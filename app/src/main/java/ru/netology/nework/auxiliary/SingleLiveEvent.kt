@@ -1,4 +1,4 @@
-package ru.netology.nework.util
+package ru.netology.nework.auxiliary
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

@@ -1,7 +1,7 @@
 package ru.netology.nework.auxiliary
 
 object Converters {
-    fun fromListDto(list: List<Long>?): String? {
+    fun fromListDto(list: List<Long>?): String {
         if (list == null) return ""
         return list.toString()
     }

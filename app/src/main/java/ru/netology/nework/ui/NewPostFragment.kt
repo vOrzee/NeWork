@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toFile
@@ -31,7 +30,6 @@ import ru.netology.nework.auxiliary.AndroidUtils.hideKeyboard
 import ru.netology.nework.auxiliary.Companion.Companion.linkArg
 import ru.netology.nework.auxiliary.Companion.Companion.mentionsCountArg
 import ru.netology.nework.auxiliary.Companion.Companion.textArg
-import ru.netology.nework.auxiliary.FloatingValue
 import ru.netology.nework.auxiliary.FloatingValue.currentFragment
 import ru.netology.nework.auxiliary.FloatingValue.getExtensionFromUri
 import ru.netology.nework.auxiliary.FloatingValue.textNewPost

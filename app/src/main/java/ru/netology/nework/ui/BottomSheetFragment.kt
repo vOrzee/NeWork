@@ -53,7 +53,6 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
                 })
             }
         }
-        adapter.submitList(usersViewModel.getLatestFilteredData())
         return binding.root
     }
 }

@@ -21,7 +21,7 @@ import ru.netology.nework.model.FeedModel
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.model.MediaModel
 import ru.netology.nework.repository.*
-import ru.netology.nework.util.SingleLiveEvent
+import ru.netology.nework.auxiliary.SingleLiveEvent
 import java.io.File
 import javax.inject.Inject
 

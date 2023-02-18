@@ -1,5 +1,6 @@
 package ru.netology.nework.ui
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
@@ -31,6 +32,7 @@ class AuthFragment : Fragment() {
 
     private var fragmentBinding: FragmentAuthBinding? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

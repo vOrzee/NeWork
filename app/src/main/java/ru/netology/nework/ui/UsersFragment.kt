@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import ru.netology.nework.adapters.UsersAdapter
-import ru.netology.nework.adapters.OnInteractionListenerUsers
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.auxiliary.Companion.Companion.textArg
 import ru.netology.nework.auxiliary.FloatingValue.currentFragment

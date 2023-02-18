@@ -1,6 +1,5 @@
 package ru.netology.nework.ui
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
@@ -19,7 +18,6 @@ import kotlinx.coroutines.flow.collectLatest
 import ru.netology.nework.R
 import ru.netology.nework.adapters.EventAdapter
 import ru.netology.nework.adapters.OnInteractionListenerEvent
-import ru.netology.nework.adapters.UsersAdapter
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.auxiliary.Companion.Companion.eventId
 import ru.netology.nework.auxiliary.Companion.Companion.eventRequestType
@@ -28,18 +26,14 @@ import ru.netology.nework.auxiliary.FloatingValue.currentFragment
 import ru.netology.nework.databinding.FragmentEventsBinding
 import ru.netology.nework.dto.AttachmentType
 import ru.netology.nework.dto.EventResponse
-import ru.netology.nework.dto.User
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.EventViewModel
-import ru.netology.nework.viewmodel.UsersViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class EventsFragment : Fragment() {
 
     val viewModel: EventViewModel by activityViewModels()
-
-    val usersViewModel: UsersViewModel by viewModels()
 
     val authViewModel: AuthViewModel by viewModels()
 
@@ -187,9 +181,6 @@ class EventsFragment : Fragment() {
 
     private lateinit var binding: FragmentEventsBinding
     private lateinit var adapter: EventAdapter
-    private lateinit var adapterUsers: UsersAdapter
-
-    var users: List<User> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -199,21 +190,12 @@ class EventsFragment : Fragment() {
 
         binding = FragmentEventsBinding.inflate(layoutInflater)
         adapter = EventAdapter(interactionListener)
-        adapterUsers = UsersAdapter()
 
         binding.list.adapter = adapter
-        binding.setUsers.adapter = adapterUsers
 
         lifecycleScope.launchWhenCreated {
             viewModel.data.collectLatest {
                 adapter.submitList(it)
-            }
-        }
-
-        lifecycleScope.launchWhenCreated {
-            usersViewModel.dataUsersList.collectLatest {
-                users = it
-                //adapterUsers.submitList(it)
             }
         }
 

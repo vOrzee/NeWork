@@ -2,7 +2,6 @@ package ru.netology.nework.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -28,7 +27,6 @@ class UsersViewModel @Inject constructor(
         }
 
     private var _dataUsersList: List<User> = listOf()
-    private var _dataUsersFilteredList: List<User> = listOf()
 
     private fun getData() = viewModelScope.launch  {
         try {
@@ -39,13 +37,4 @@ class UsersViewModel @Inject constructor(
             _dataUsersList = it
         }
     }
-
-    fun filteredData(listIds: List<Long>):List<User> {
-        _dataUsersFilteredList =  _dataUsersList.filter { user ->
-            listIds.contains(user.id)
-        }
-        return _dataUsersFilteredList
-    }
-
-    fun getLatestFilteredData() = _dataUsersFilteredList
 }

@@ -9,7 +9,6 @@ object ConstantValues {
     const val POST_CONTENT = "content"
     const val POST_LINK = "link"
     const val POST_MENTIONS_COUNT = "count mentions in post"
-    const val TIME_CONTENT = "time"
     const val EVENT_ID = "event id"
     const val EVENT_REQUEST_TYPE = "party or speakers"
     val emptyPost = Post(
