@@ -2,9 +2,6 @@ package ru.netology.nework.dao
 
 import androidx.room.*
 import ru.netology.nework.auxiliary.Converters
-import ru.netology.nework.dto.Attachment
-import ru.netology.nework.dto.AttachmentType
-import ru.netology.nework.dto.Coordinates
 import ru.netology.nework.dto.Post
 
 @Entity
@@ -31,7 +28,7 @@ data class PostEntity(
     var likes: Int = 0,
 ) {
     init {
-        likes = Converters.toListDto(likeOwnerIds)?.size ?: 0
+        likes = Converters.toListDto(likeOwnerIds).size
     }
 
     fun toDto() = Post(

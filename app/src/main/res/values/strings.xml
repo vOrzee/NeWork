@@ -78,4 +78,21 @@
     <string name="time_event_hint">HH:mm</string>
     <string name="not_value_event">List is empty</string>
     <string name="leave">Leave</string>
+    <string name="job_organization_title">Company:</string>
+    <string name="job_position_title">Position:</string>
+    <string name="job_working_period">Working:</string>
+    <string name="job_link">link</string>
+    <string name="job_organization_hint">Place for working</string>
+    <string name="job_position_hint">Position</string>
+    <string name="job_working_period_hint">Start working date - End working date</string>
+    <string name="job_working_period_start">Start (YYYY-MM-DD)</string>
+    <string name="job_working_period_end">End (YYYY-MM-DD)</string>
+    <string name="job_description">Jobs: </string>
+    <string name="event_description">Events:</string>
+    <string name="post_description">Posts:</string>
+    <string name="job_remove">Remove</string>
+    <string name="job_edit">Edit</string>
+    <string name="no_posts">Not activity in post</string>
+    <string name="no_events">Not activity in events</string>
+    <string name="no_jobs">Jobs not publicated</string>
 </resources>

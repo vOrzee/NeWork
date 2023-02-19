@@ -6,13 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import ru.netology.nework.R
+import ru.netology.nework.adapters.OnInteractionListenerUsers
 import ru.netology.nework.adapters.UsersAdapter
 import ru.netology.nework.auxiliary.Companion.Companion.eventId
 import ru.netology.nework.auxiliary.Companion.Companion.eventRequestType
+import ru.netology.nework.auxiliary.Companion.Companion.userId
 import ru.netology.nework.databinding.FragmentBottomSheetBinding
+import ru.netology.nework.dto.User
 import ru.netology.nework.viewmodel.EventViewModel
 import ru.netology.nework.viewmodel.UsersViewModel
 
@@ -29,7 +34,14 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
     ): View {
 
         val binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
-        val adapter = UsersAdapter()
+        val adapter = UsersAdapter(object : OnInteractionListenerUsers {
+            override fun onTap(user: User) {
+                findNavController().navigate(
+                    R.id.action_bottomSheetFragment_to_profileFragment,
+                    Bundle().apply { userId = user.id }
+                )
+            }
+        })
         var filteredList: List<Long> = emptyList()
         binding.list.adapter = adapter
         lifecycleScope.launchWhenCreated {

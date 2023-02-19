@@ -8,6 +8,7 @@ interface Repository {
     val data: Flow<List<Post>>
     val dataUsers: Flow<List<User>>
     val dataEvents: Flow<List<EventResponse>>
+    val dataJobs: Flow<List<Job>>
 
     fun getNewerCount(id: Long): Flow<Int>
     suspend fun showNewPosts()
@@ -26,4 +27,8 @@ interface Repository {
     suspend fun removeEventsById(id: Long)
     suspend fun likeByIdEvents(event: EventResponse)
     suspend fun joinByIdEvents(event: EventResponse)
+    suspend fun getJobs(id: Long)
+    suspend fun getMyJobs(id: Long)
+    suspend fun saveJob(job: Job)
+    suspend fun removeJobById(id: Long)
 }

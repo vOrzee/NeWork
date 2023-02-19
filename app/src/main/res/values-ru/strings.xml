@@ -78,4 +78,21 @@
     <string name="time_event_hint">HH:mm</string>
     <string name="not_value_event">Пока никого</string>
     <string name="leave">не смогу</string>
+    <string name="job_organization_title">Место работы: </string>
+    <string name="job_position_title">Должность: </string>
+    <string name="job_working_period">Период работы: </string>
+    <string name="job_link">Ссылка</string>
+    <string name="job_organization_hint">Место работы</string>
+    <string name="job_position_hint">Должность</string>
+    <string name="job_working_period_hint">Start working date - End working date</string>
+    <string name="job_working_period_start">Начало (YYYY-MM-DD)</string>
+    <string name="job_working_period_end">Конец (YYYY-MM-DD)</string>
+    <string name="job_description">"Работы: "</string>
+    <string name="event_description">События:</string>
+    <string name="post_description">Посты:</string>
+    <string name="job_remove">Удалить</string>
+    <string name="job_edit">Редактировать</string>
+    <string name="no_posts">Не замечены в постах</string>
+    <string name="no_events">Не замечены в событиях</string>
+    <string name="no_jobs">Работы не опубликованы</string>
 </resources>

@@ -55,7 +55,7 @@ class NewEventFragment : Fragment() {
     private var speakersIds:MutableList<Long> = mutableListOf()
     private var typeEvent:EventType = EventType.ONLINE
     private var adapter = UsersAdapter(object : OnInteractionListenerUsers {
-        override fun onMention(user: User) {
+        override fun onTap(user: User) {
             speakersIds.add(user.id)
             binding.countMentions.text = speakersIds.size.toString()
         }
@@ -83,7 +83,7 @@ class NewEventFragment : Fragment() {
                 inputLink.setText(event.link)
                 countMentions.text = event.speakerIds.size.toString()
                 dateEventInput.setText(event.datetime.take(10))
-                timeEventInput.setText(event.datetime.subSequence(11,19))
+                timeEventInput.setText(event.datetime.subSequence(11,16))
             }
 
             if (edit.text.isNullOrBlank()) {

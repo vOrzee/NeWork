@@ -6,6 +6,7 @@ import ru.netology.nework.auxiliary.ConstantValues.EVENT_REQUEST_TYPE
 import ru.netology.nework.auxiliary.ConstantValues.POST_CONTENT
 import ru.netology.nework.auxiliary.ConstantValues.POST_LINK
 import ru.netology.nework.auxiliary.ConstantValues.POST_MENTIONS_COUNT
+import ru.netology.nework.auxiliary.ConstantValues.USER_ID
 
 
 class Companion {
@@ -26,6 +27,9 @@ class Companion {
         var Bundle.eventRequestType: String?
             set(value) = putString(EVENT_REQUEST_TYPE, value)
             get() = getString(EVENT_REQUEST_TYPE)
+        var Bundle.userId: Long
+            set(value) = putLong(USER_ID, value)
+            get() = getLong(USER_ID)
     }
 
 }

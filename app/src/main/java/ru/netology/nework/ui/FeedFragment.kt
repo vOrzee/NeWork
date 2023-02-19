@@ -2,6 +2,7 @@ package ru.netology.nework.ui
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -24,6 +25,7 @@ import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.auxiliary.Companion.Companion.linkArg
 import ru.netology.nework.auxiliary.Companion.Companion.mentionsCountArg
 import ru.netology.nework.auxiliary.Companion.Companion.textArg
+import ru.netology.nework.auxiliary.Companion.Companion.userId
 import ru.netology.nework.auxiliary.FloatingValue.currentFragment
 import ru.netology.nework.databinding.FragmentFeedBinding
 import ru.netology.nework.dto.AttachmentType
@@ -31,6 +33,7 @@ import ru.netology.nework.dto.Post
 import ru.netology.nework.model.FeedModelState
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.PostViewModel
+import ru.netology.nework.viewmodel.UsersViewModel
 import javax.inject.Inject
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -41,11 +44,23 @@ class FeedFragment : Fragment() {
 
     val authViewModel: AuthViewModel by viewModels()
 
+    private val usersViewModel: UsersViewModel by activityViewModels()
+
     @Inject
     lateinit var appAuth: AppAuth
 
+    private val mediaPlayer = MediaPlayer()
 
     private val interactionListener = object : OnInteractionListener {
+
+        override fun onTapAvatar(post: Post) {
+            findNavController().navigate(
+                R.id.action_feedFragment_to_profileFragment,
+                Bundle().apply {
+                    userId = post.authorId
+                }
+            )
+        }
 
         override fun onLike(post: Post) {
             if (authViewModel.authenticated) {
@@ -120,7 +135,8 @@ class FeedFragment : Fragment() {
 
                         if (videoView.layoutParams?.width != null) {
                             videoView.layoutParams?.width = resources.displayMetrics.widthPixels
-                            videoView.layoutParams?.height = (videoView.layoutParams?.width!! * 0.5625).toInt()
+                            videoView.layoutParams?.height =
+                                (videoView.layoutParams?.width!! * 0.5625).toInt()
                         }
                         stopPlayback()
 
@@ -129,19 +145,23 @@ class FeedFragment : Fragment() {
                 }
             }
             if (post.attachment?.type == AttachmentType.AUDIO) {
-                viewModel.mediaPlayer.reset()
-                if (viewModel.mediaPlayer.isPlaying) {
-                    viewModel.mediaPlayer.stop()
+                if (mediaPlayer.isPlaying) {
+                    mediaPlayer.pause()
                 } else {
-                    viewModel.mediaPlayer.setDataSource(post.attachment.url)
-                    viewModel.mediaPlayer.prepare()
-                    viewModel.mediaPlayer.start()
+                    mediaPlayer.reset()
+                    mediaPlayer.setDataSource(post.attachment.url)
+                    mediaPlayer.prepare()
+                    mediaPlayer.start()
                 }
             }
         }
 
         override fun onLink(post: Post) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.link))
+            val intent = if (post.link?.contains("https://") == true || post.link?.contains("http://") == true) {
+                Intent(Intent.ACTION_VIEW, Uri.parse(post.link))
+            } else {
+                Intent(Intent.ACTION_VIEW, Uri.parse("http://${post.link}"))
+            }
             startActivity(intent)
         }
 
@@ -167,6 +187,8 @@ class FeedFragment : Fragment() {
         adapter = PostAdapter(interactionListener)
 
         binding.list.adapter = adapter
+
+        usersViewModel.dataUsersList
 
         viewModel.data.observe(viewLifecycleOwner) {
             adapter.submitList(it.posts)
@@ -239,7 +261,7 @@ class FeedFragment : Fragment() {
                 menuProvider = this
             }, viewLifecycleOwner)
         }
-        binding.mainNavView.setOnItemSelectedListener{ menuItem ->
+        binding.mainNavView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_posts -> {
                     true
@@ -253,7 +275,7 @@ class FeedFragment : Fragment() {
                     true
                 }
                 R.id.navigation_profile -> {
-                    //findNavController().navigate(action_feedFragment_to_)  //TODO
+                    findNavController().navigate(R.id.action_feedFragment_to_profileFragment)
                     true
                 }
                 else -> false
@@ -312,6 +334,11 @@ class FeedFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        mediaPlayer.release()
+        super.onDestroyView()
     }
 
     override fun onResume() {

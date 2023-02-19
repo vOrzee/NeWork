@@ -12,7 +12,7 @@ import ru.netology.nework.databinding.FragmentCardUsersBinding
 import ru.netology.nework.dto.User
 
 interface OnInteractionListenerUsers {
-    fun onMention(user: User) {}
+    fun onTap(user: User) {}
 }
 
 class UsersAdapter(
@@ -64,7 +64,7 @@ class UserViewHolder(
 
     private fun userListeners(user: User) {
         binding.userCard.setOnClickListener {
-            onInteractionListener.onMention(user)
+            onInteractionListener.onTap(user)
         }
     }
 }

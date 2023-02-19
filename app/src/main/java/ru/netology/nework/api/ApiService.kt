@@ -76,4 +76,16 @@ interface ApiService {
 
     @DELETE("events/{id}/participants")
     suspend fun unJoinByIdEvent(@Path("id") id: Long): Response<EventResponse>
+
+    @GET("my/jobs")
+    suspend fun getMyJobs(): Response<List<Job>>
+
+    @POST("my/jobs")
+    suspend fun saveJob(@Body job: Job): Response<Job>
+
+    @DELETE("my/jobs/{id}")
+    suspend fun removeJobById(@Path("id") id: Long): Response<Unit>
+
+    @GET("{id}/jobs")
+    suspend fun getUserJobs(@Path("id") id: Long): Response<List<Job>>
 }

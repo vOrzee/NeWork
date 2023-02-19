@@ -1,7 +1,6 @@
 package ru.netology.nework.viewmodel
 
 import android.app.Application
-import android.media.MediaPlayer
 import android.net.Uri
 import androidx.core.net.toFile
 import androidx.core.net.toUri
@@ -40,8 +39,6 @@ class EventViewModel @Inject constructor(
     private val _eventCreated = SingleLiveEvent<Unit>()
     val eventCreated: LiveData<Unit>
         get() = _eventCreated
-
-    val mediaPlayer = MediaPlayer()
 
     private val _media = MutableLiveData(
         MediaModel(

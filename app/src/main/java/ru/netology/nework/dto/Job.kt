@@ -6,5 +6,6 @@ data class Job(
     val position:String,
     val start:String,
     val finish:String? = null,
-    val link:String? = null
+    val link:String? = null,
+    val ownerId:Long = -1L,
 )

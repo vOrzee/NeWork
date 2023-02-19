@@ -3,7 +3,6 @@ package ru.netology.nework.auxiliary
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContentProviderCompat.requireContext
 
 object AndroidUtils {
     fun hideKeyboard(view: View) {

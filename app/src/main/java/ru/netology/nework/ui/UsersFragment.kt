@@ -12,11 +12,14 @@ import ru.netology.nework.R
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import ru.netology.nework.adapters.OnInteractionListenerUsers
 import ru.netology.nework.adapters.UsersAdapter
 import ru.netology.nework.auth.AppAuth
 import ru.netology.nework.auxiliary.Companion.Companion.textArg
+import ru.netology.nework.auxiliary.Companion.Companion.userId
 import ru.netology.nework.auxiliary.FloatingValue.currentFragment
 import ru.netology.nework.databinding.FragmentUsersBinding
+import ru.netology.nework.dto.User
 import ru.netology.nework.viewmodel.AuthViewModel
 import ru.netology.nework.viewmodel.UsersViewModel
 import javax.inject.Inject
@@ -39,7 +42,18 @@ class UsersFragment : Fragment() {
 
         var menuProvider: MenuProvider? = null
 
-        val adapter = UsersAdapter()
+        val adapter = UsersAdapter(
+            object : OnInteractionListenerUsers {
+                override fun onTap(user: User) {
+                    findNavController().navigate(
+                        R.id.action_usersFragment_to_profileFragment,
+                        Bundle().apply {
+                            userId = user.id
+                        }
+                    )
+                }
+            }
+        )
 
         authViewModel.data.observe(viewLifecycleOwner) {
             menuProvider?.let(requireActivity()::removeMenuProvider)
@@ -98,18 +112,14 @@ class UsersFragment : Fragment() {
                     true
                 }
                 R.id.navigation_events -> {
-                    // Handle profile item click
-                    findNavController().navigate(R.id.action_usersFragment_to_feedFragment)
-                    findNavController().navigate(R.id.action_feedFragment_to_eventsFragment)
+                    findNavController().navigate(R.id.action_usersFragment_to_eventsFragment)
                     true
                 }
                 R.id.navigation_users -> {
                     true
                 }
                 R.id.navigation_profile -> {
-                    // Handle profile item click
-                    findNavController().navigate(R.id.action_usersFragment_to_feedFragment)
-                    //findNavController().navigate(action_feedFragment_to_)  //TODO
+                    findNavController().navigate(R.id.action_usersFragment_to_profileFragment)
                     true
                 }
                 else -> false

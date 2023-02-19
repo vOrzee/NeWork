@@ -54,7 +54,7 @@ class NewPostFragment : Fragment() {
     private var attachRes: Attachment? = null
     private var mentionsIds:MutableList<Long> = mutableListOf()
     private var adapter = UsersAdapter(object : OnInteractionListenerUsers {
-        override fun onMention(user: User) {
+        override fun onTap(user: User) {
             mentionsIds.add(user.id)
             binding.countMentions.text = mentionsIds.size.toString()
         }

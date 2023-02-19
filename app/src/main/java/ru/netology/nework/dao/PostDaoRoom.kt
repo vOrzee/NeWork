@@ -90,4 +90,16 @@ interface PostDaoRoom {
 
     @Query("DELETE FROM EventsEntity WHERE id = :id")
     suspend fun removeByIdEvent(id: Long)
+
+    @Query("DELETE FROM JobEntity WHERE id = :id")
+    suspend fun removeByIdJob(id: Long)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertJob(job: JobEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertJobs(jobs: List<JobEntity>)
+
+    @Query("SELECT * FROM JobEntity")
+    fun getJobs(): Flow<List<JobEntity>>
 }

@@ -33,6 +33,7 @@ interface OnInteractionListenerEvent {
     fun onSpeakersAction(event: EventResponse) {}
     fun onPartyAction(event: EventResponse) {}
     fun onJoinAction(event: EventResponse) {}
+    fun onTapAvatar(event: EventResponse) {}
 }
 
 class EventAdapter(
@@ -48,6 +49,12 @@ class EventAdapter(
         val post = getItem(position)
         holder.renderingPostStructure(post)
     }
+
+    override fun onViewRecycled(holder: EventViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.videoAttachment.stopPlayback()
+        holder.binding.videoAttachment.setVideoURI(null)
+    }
 }
 
 class EventDiffCallback : DiffUtil.ItemCallback<EventResponse>() {
@@ -61,7 +68,7 @@ class EventDiffCallback : DiffUtil.ItemCallback<EventResponse>() {
 }
 
 class EventViewHolder(
-    private val binding: FragmentCardEventBinding,
+    val binding: FragmentCardEventBinding,
     private val onInteractionListener: OnInteractionListenerEvent,
 ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -151,6 +158,9 @@ class EventViewHolder(
             }
             speakersButton.setOnClickListener{
                 onInteractionListener.onSpeakersAction(event)
+            }
+            avatar.setOnClickListener {
+                onInteractionListener.onTapAvatar(event)
             }
             moreVert.setOnClickListener {
                 val popupMenu = PopupMenu(it.context, it)

@@ -30,6 +30,7 @@ interface OnInteractionListener {
     fun onPlayPost(post: Post, videoView: VideoView? = null) {}
     fun onLink(post: Post) {}
     fun onPreviewAttachment(post: Post) {}
+    fun onTapAvatar(post: Post) {}
 }
 
 class PostAdapter(
@@ -45,6 +46,12 @@ class PostAdapter(
         val post = getItem(position)
         holder.renderingPostStructure(post)
     }
+
+    override fun onViewRecycled(holder: PostViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.videoAttachment.stopPlayback()
+        holder.binding.videoAttachment.setVideoURI(null)
+    }
 }
 
 class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
@@ -58,10 +65,9 @@ class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
 }
 
 class PostViewHolder(
-    private val binding: FragmentCardPostBinding,
+    val binding: FragmentCardPostBinding,
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
-
 
     fun renderingPostStructure(post: Post) {
         with(binding) {
@@ -73,6 +79,7 @@ class PostViewHolder(
             share.isChecked = post.sharedByMe
             mentions.text = NumberTranslator.translateNumber(post.mentionIds?.size ?: 0)
             mentions.isCheckable = true
+            mentions.isClickable = false
             mentions.isChecked = post.mentionedMe
             links.isVisible = (post.link != null)
             if (post.link != null) {
@@ -134,6 +141,9 @@ class PostViewHolder(
             }
             links.setOnClickListener {
                 onInteractionListener.onLink(post)
+            }
+            avatar.setOnClickListener {
+                onInteractionListener.onTapAvatar(post)
             }
             moreVert.setOnClickListener {
                 val popupMenu = PopupMenu(it.context, it)

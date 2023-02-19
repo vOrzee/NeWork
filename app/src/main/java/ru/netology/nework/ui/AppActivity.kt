@@ -43,6 +43,7 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (currentFragment == "NewPostFragment") {
             findViewById<FloatingActionButton>(R.id.fab_cancel).callOnClick()
