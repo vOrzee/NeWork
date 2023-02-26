@@ -157,6 +157,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/speakers"
+                app:cornerRadius="0dp"
                 app:layout_constraintEnd_toStartOf="@id/party_button"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
@@ -167,6 +168,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/party"
+                app:cornerRadius="0dp"
                 app:layout_constraintEnd_toStartOf="@id/join_button"
                 app:layout_constraintStart_toEndOf="@id/speakers_button"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -175,8 +177,9 @@
                 android:id="@+id/join_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/join"
                 android:checkable="true"
+                android:text="@string/join"
+                app:cornerRadius="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/party_button"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -212,8 +215,8 @@
         android:id="@+id/links"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/teal_700"
         android:autoLink="web"
+        android:textColor="@color/teal_700"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/barrier2" />
 
@@ -260,12 +263,12 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/usual_margin"
             android:layout_marginEnd="@dimen/usual_margin"
+            android:contentDescription="@string/description_image_attachment"
             android:paddingVertical="@dimen/usual_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/plug_video"
-            tools:ignore="MissingConstraints"
-            android:contentDescription="@string/description_image_attachment" />
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/description_attachment"

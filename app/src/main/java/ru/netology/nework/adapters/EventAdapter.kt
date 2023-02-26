@@ -80,7 +80,7 @@ class EventViewHolder(
             content.text = event.content
             like.text = NumberTranslator.translateNumber(event.likeOwnerIds.size)
             like.isChecked = event.likedByMe
-            eventDateValue.text = event.datetime
+            eventDateValue.text = convertDatePublished(event.datetime).dropLast(3)
             eventFormatValue.text = event.type.name
             joinButton.isChecked = event.participatedByMe
             joinButton.text = if (joinButton.isChecked) {
