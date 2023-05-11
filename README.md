@@ -1,6 +1,6 @@
 # Дипломное задание "NeWork" (Профессия Android Developer)
 
-![]([pic/logo.png](https://github.com/netology-code/and-diploma/blob/master/pic/logo.png))
+![](https://github.com/netology-code/and-diploma/blob/master/pic/logo.png)
 
 ## Легенда
 
